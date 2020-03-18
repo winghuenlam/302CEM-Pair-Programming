@@ -1,11 +1,9 @@
 # Groupmate: Lam Wing Huen(5520 1870), Lai Tiffany Hoi-Jun(5520 1151), Lo Yan Cho(5520 1022)
 
 # Net Chargable Income calculation:
-# Case 1: x < 7100 * 12
-#         NCI = salary
-# Case 2: (7100*12 <= x <= 30000 * 12)
+# Case 1: (x <= 30000 * 12)
 #         NCI = salary * 0.95
-# Case 3: (> 30000 * 12)
+# Case 2: (> 30000 * 12)
 #         NCI = salary - 1500
 
 # Progressive tax calculation:
@@ -15,14 +13,15 @@
 # Case 4: 150000 < NCI <= 200000
 # Case 5: NCI >= 200000
 
+basic_allowance = 132000
+
 def calculate_nci(salary):
-    if salary < 7100*12:
-        nci = salary
-    elif salary >=7100*12 and salary <=30000*12:
-        nci = salary*0.95
+    if salary <=30000*12:
+        mpf = salary*0.05
     else:
-        nci = salary - 1500 
-    return(nci)
+        mpf = 30000*12*0.05
+    nci = salary - mpf
+    return(nci, mpf)
 
 def standard_tax(nci):
     tax = nci*0.15
@@ -42,22 +41,25 @@ def calculate_p_tax(nci):
     return(p_tax)
 
 status = input("Enter '1' if you are single, '2' if you are married: ")
-salary = input('Enter your salary per year: ')
-if (str(status) == '2'):
-    partner_salary = input("Enter your partner's salary per year: ")
+status_text = 'single' if status=='1' else 'married'
+salary = int(input('Enter your salary per year: '))
+if (status == '2'):
+    partner_salary = int(input("Enter your partner's salary per year: "))
 else:
     partner_salary = None
 
 
-nci = calculate_nci(int(salary))
+nci, mpf = calculate_nci(salary)
+nci = nci - basic_allowance if nci > basic_allowance else 0
 p_tax = calculate_p_tax(nci)
 s_tax = standard_tax(nci)
 
 print()
-print("====================================== RESULT ======================================")
+print("====================================== RESULT (",status_text,") ======================================")
 
 if partner_salary is not None:
-    partner_nci = calculate_nci(int(partner_salary))
+    partner_nci, parnter_mpf = calculate_nci(partner_salary)
+    partner_nci = partner_nci - basic_allowance if partner_nci > basic_allowance else 0
     partner_p_tax = calculate_p_tax(partner_nci)
     partner_s_tax = standard_tax(partner_nci)
 
@@ -66,6 +68,8 @@ if partner_salary is not None:
 
     total_nci = nci + partner_nci
     joint_p_tax = calculate_p_tax(total_nci)
+    print('Your MPF: ', mpf, ", your parnter's MPF: ", parnter_mpf)
+    print('Your Net Chargable Income: ', nci, ", your parnter's Net Chargable Income: ", partner_nci)
     print('Total tax to be paid if paid seperately(progressive tax): ', total_seperate_tax, '(Your tax: ', p_tax, ", your partner's tax: " ,partner_p_tax,')')
     print('Total standard tax: ', total_standard_tax)
     print('Total joint tax: ', joint_p_tax)
@@ -76,6 +80,8 @@ if partner_salary is not None:
     else:
         print ('Recommendation: Joint Assessment Tax')
 else:
+    print('Your MPF: ', mpf)
+    print('Your Net Chargable Income: ', nci)
     print('progressive tax: ', p_tax)
     print('standard tax: ', s_tax)
     if p_tax > s_tax:
