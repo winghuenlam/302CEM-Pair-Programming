@@ -67,7 +67,7 @@ def tax_calculation():
     nci = nci1 - basic_allowance if nci1 > basic_allowance else 0
 
     p_tax = calculate_p_tax(nci)
-    s_tax = standard_tax(nci)
+    s_tax = standard_tax(nci1)
 
     values={
         'mpf': [mpf],
@@ -85,13 +85,16 @@ def tax_calculation():
         partner_nci = partner_nci1 - basic_allowance if partner_nci1 > basic_allowance else 0
 
         partner_p_tax = calculate_p_tax(partner_nci)
-        partner_s_tax = standard_tax(partner_nci)
+        partner_s_tax = standard_tax(partner_nci1)
 
         total_seperate_tax = p_tax + partner_p_tax
         total_standard_tax = s_tax + partner_s_tax
 
         total_nci = nci1 + partner_nci1 - basic_allowance*2 if nci1 + partner_nci1 >= basic_allowance*2 else 0
         joint_p_tax = calculate_p_tax(total_nci)
+
+        stand_pro_total_a = s_tax + partner_p_tax
+        stand_pro_total_b = partner_s_tax + p_tax
 
         values['mpf'].append(parnter_mpf)
         values['nci'].append(partner_nci)
@@ -101,18 +104,28 @@ def tax_calculation():
 
         print('Your MPF: ', mpf, ", your parnter's MPF: ", parnter_mpf)
         print('Your Net Chargable Income: ', nci, ", your parnter's Net Chargable Income: ", partner_nci)
-        print('Total tax to be paid if paid seperately(progressive tax): ', total_seperate_tax, '(Your tax: ', p_tax, ", your partner's tax: " ,partner_p_tax,')')
+        print('Total seperate tax(progressive tax): ', total_seperate_tax, '(Your tax: ', p_tax, ", your partner's tax: " ,partner_p_tax,')')
+        if min([stand_pro_total_a,stand_pro_total_b])==stand_pro_total_a:
+            print('Total seperate tax(standard + progressive tax): ', stand_pro_total_a, '(Your standard tax: ', s_tax, ", your partner's progressive tax: " ,partner_p_tax,')')
+        else:
+            print('Total seperate tax(progressive + standard tax): ', stand_pro_total_b, '(Your progressive tax: ', p_tax, ", your partner's standard tax: " ,partner_s_tax,')')
+
         print('Total standard tax: ', total_standard_tax)
         print('Total joint tax: ', joint_p_tax)
-        if total_seperate_tax < total_standard_tax and total_seperate_tax < joint_p_tax:
+        compare_list = [total_seperate_tax, total_standard_tax, joint_p_tax, stand_pro_total_a, stand_pro_total_b]
+
+        if min(compare_list) == total_seperate_tax:
             values['recommend'] = 'seperate'
             print('Recommendation: Seperate Progressive Tax')
-        elif total_standard_tax <total_seperate_tax and total_standard_tax < joint_p_tax: 
+        elif min(compare_list) == total_seperate_tax:
             values['recommend'] = 'standard'
             print ('Recommedation: Standard Tax')
-        else:
+        elif min(compare_list) == joint_p_tax:
             values['recommend'] = 'joint'
             print ('Recommendation: Joint Assessment Tax')
+        else:
+            values['recommend'] = 'standard and progressive tax'
+            print ('Recommendation: Standard and Progressive tax')
     else:
         print('Your MPF: ', mpf)
         print('Your Net Chargable Income: ', nci)

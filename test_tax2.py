@@ -1,5 +1,5 @@
 import mock
-from tax import tax_calculation
+from tax2 import tax_calculation
 
 @mock.patch('builtins.input', side_effect=['2', '400000', '370000'])
 def test_1(self):
@@ -9,7 +9,7 @@ def test_1(self):
    assert val['nci'][0] == 250000
    assert val['nci'][1] == 220000
    assert val['individual_tax'] == 43900
-   assert val['standard_tax'] == 70500
+   assert val['standard_tax'] == 110100
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 61900
 
@@ -21,7 +21,7 @@ def test_2(self):
    assert val['nci'][0] == 250000
    assert val['nci'][1] == 172000
    assert val['individual_tax'] == 36580
-   assert val['standard_tax'] == 63300
+   assert val['standard_tax'] == 102900
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 53740
 
@@ -33,7 +33,7 @@ def test_3(self):
    assert val['nci'][0] == 250000
    assert val['nci'][1] == 124500
    assert val['individual_tax'] == 30950
-   assert val['standard_tax'] == 56175
+   assert val['standard_tax'] == 95775
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 45665
 
@@ -45,7 +45,7 @@ def test_4(self):
    assert val['nci'][0] == 250000
    assert val['nci'][1] == 77000
    assert val['individual_tax'] == 27120
-   assert val['standard_tax'] == 49050
+   assert val['standard_tax'] == 88650
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 37590
 
@@ -57,7 +57,7 @@ def test_5(self):
    assert val['nci'][0] == 250000
    assert val['nci'][1] == 39000
    assert val['individual_tax'] == 25280
-   assert val['standard_tax'] == 43350
+   assert val['standard_tax'] == 82950
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 31130
 
@@ -69,7 +69,7 @@ def test_6(self):
    assert val['nci'][0] == 250000
    assert val['nci'][1] == 1000
    assert val['individual_tax'] == 24520
-   assert val['standard_tax'] == 37650
+   assert val['standard_tax'] == 77250
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 24670
 
@@ -81,7 +81,7 @@ def test_7(self):
    assert val['nci'][0] == 250000
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 24500
-   assert val['standard_tax'] == 37500
+   assert val['standard_tax'] == 70125
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 16595
 
@@ -93,7 +93,7 @@ def test_8(self):
    assert val['nci'][0] == 250000
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 24500
-   assert val['standard_tax'] == 37500
+   assert val['standard_tax'] == 61800
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 8800
 
@@ -105,7 +105,7 @@ def test_9(self):
    assert val['nci'][0] == 200500
    assert val['nci'][1] == 172000
    assert val['individual_tax'] == 28165
-   assert val['standard_tax'] == 55875
+   assert val['standard_tax'] == 95475
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 45325
 
@@ -117,7 +117,7 @@ def test_10(self):
    assert val['nci'][0] == 200500
    assert val['nci'][1] == 124500
    assert val['individual_tax'] == 22535
-   assert val['standard_tax'] == 48750
+   assert val['standard_tax'] == 88350
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 37250
 
@@ -129,7 +129,7 @@ def test_11(self):
    assert val['nci'][0] == 200500
    assert val['nci'][1] == 77000
    assert val['individual_tax'] == 18705
-   assert val['standard_tax'] == 41625
+   assert val['standard_tax'] == 81225
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 29175
 
@@ -141,7 +141,7 @@ def test_12(self):
    assert val['nci'][0] == 200500
    assert val['nci'][1] == 39000
    assert val['individual_tax'] == 16865
-   assert val['standard_tax'] == 35925
+   assert val['standard_tax'] == 75525
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 22715
 
@@ -153,7 +153,7 @@ def test_13(self):
    assert val['nci'][0] == 200500
    assert val['nci'][1] == 1000
    assert val['individual_tax'] == 16105
-   assert val['standard_tax'] == 30225
+   assert val['standard_tax'] == 69825
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 16255
 
@@ -165,7 +165,7 @@ def test_14(self):
    assert val['nci'][0] == 200500
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 16085
-   assert val['standard_tax'] == 30075
+   assert val['standard_tax'] == 62700
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 9560
 
@@ -177,7 +177,7 @@ def test_15(self):
    assert val['nci'][0] == 200500
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 16085
-   assert val['standard_tax'] == 30075
+   assert val['standard_tax'] == 54375
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 3910
 
@@ -189,7 +189,7 @@ def test_16(self):
    assert val['nci'][0] == 153000
    assert val['nci'][1] == 124500
    assert val['individual_tax'] == 15870
-   assert val['standard_tax'] == 41625
+   assert val['standard_tax'] == 81225
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 29175
 
@@ -201,7 +201,7 @@ def test_17(self):
    assert val['nci'][0] == 153000
    assert val['nci'][1] == 77000
    assert val['individual_tax'] == 12040
-   assert val['standard_tax'] == 34500
+   assert val['standard_tax'] == 74100
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 21100
 
@@ -213,7 +213,7 @@ def test_18(self):
    assert val['nci'][0] == 153000
    assert val['nci'][1] == 39000
    assert val['individual_tax'] == 10200
-   assert val['standard_tax'] == 28800
+   assert val['standard_tax'] == 68400
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 14880
 
@@ -225,7 +225,7 @@ def test_19(self):
    assert val['nci'][0] == 153000
    assert val['nci'][1] == 1000
    assert val['individual_tax'] == 9440
-   assert val['standard_tax'] == 23100
+   assert val['standard_tax'] == 62700
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 9560
 
@@ -237,7 +237,7 @@ def test_20(self):
    assert val['nci'][0] == 153000
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 9420
-   assert val['standard_tax'] == 22950
+   assert val['standard_tax'] == 55575
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 4650
 
@@ -249,7 +249,7 @@ def test_21(self):
    assert val['nci'][0] == 153000
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 9420
-   assert val['standard_tax'] == 22950
+   assert val['standard_tax'] == 47250
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 1060
 
@@ -261,7 +261,7 @@ def test_22(self):
    assert val['nci'][0] == 105500
    assert val['nci'][1] == 77000
    assert val['individual_tax'] == 7170
-   assert val['standard_tax'] == 27375
+   assert val['standard_tax'] == 66975
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 13550
 
@@ -273,7 +273,7 @@ def test_23(self):
    assert val['nci'][0] == 105500
    assert val['nci'][1] == 39000
    assert val['individual_tax'] == 5330
-   assert val['standard_tax'] == 21675
+   assert val['standard_tax'] == 61275
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 8450
 
@@ -285,7 +285,7 @@ def test_24(self):
    assert val['nci'][0] == 105500
    assert val['nci'][1] == 1000
    assert val['individual_tax'] == 4570
-   assert val['standard_tax'] == 15975
+   assert val['standard_tax'] == 55575
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 4650
 
@@ -297,7 +297,7 @@ def test_25(self):
    assert val['nci'][0] == 105500
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 4550
-   assert val['standard_tax'] == 15825
+   assert val['standard_tax'] == 48450
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 1540
 
@@ -309,7 +309,7 @@ def test_26(self):
    assert val['nci'][0] == 105500
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 4550
-   assert val['standard_tax'] == 15825
+   assert val['standard_tax'] == 40125
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 70
 
@@ -321,7 +321,7 @@ def test_27(self):
    assert val['nci'][0] == 58000
    assert val['nci'][1] == 39000
    assert val['individual_tax'] == 2260
-   assert val['standard_tax'] == 14550
+   assert val['standard_tax'] == 54150
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 3820
 
@@ -333,7 +333,7 @@ def test_28(self):
    assert val['nci'][0] == 58000
    assert val['nci'][1] == 1000
    assert val['individual_tax'] == 1500
-   assert val['standard_tax'] == 8850
+   assert val['standard_tax'] == 48450
    assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 1540
 
@@ -345,7 +345,7 @@ def test_29(self):
    assert val['nci'][0] == 58000
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 1480
-   assert val['standard_tax'] == 8700
+   assert val['standard_tax'] == 41325
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 230
 
@@ -357,7 +357,7 @@ def test_30(self):
    assert val['nci'][0] == 58000
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 1480
-   assert val['standard_tax'] == 8700
+   assert val['standard_tax'] == 33000
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 0
 
@@ -369,8 +369,8 @@ def test_31(self):
    assert val['nci'][0] == 20000
    assert val['nci'][1] == 1000
    assert val['individual_tax'] == 420
-   assert val['standard_tax'] == 3150
-   assert val['recommend'] == 'joint'
+   assert val['standard_tax'] == 42750
+   assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 420
 
 @mock.patch('builtins.input', side_effect=['2', '160000', '90000'])
@@ -381,7 +381,7 @@ def test_32(self):
    assert val['nci'][0] == 20000
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 400
-   assert val['standard_tax'] == 3000
+   assert val['standard_tax'] == 35625
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 0
 
@@ -393,7 +393,7 @@ def test_33(self):
    assert val['nci'][0] == 20000
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 400
-   assert val['standard_tax'] == 3000
+   assert val['standard_tax'] == 27300
    assert val['recommend'] == 'joint'
    assert val['joint_tax'] == 0
 
@@ -405,8 +405,8 @@ def test_34(self):
    assert val['nci'][0] == 0
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 0
-   assert val['standard_tax'] == 0
-   assert val['recommend'] == 'joint'
+   assert val['standard_tax'] == 29925
+   assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 0
 
 @mock.patch('builtins.input', side_effect=['2', '120000', '30000'])
@@ -417,8 +417,8 @@ def test_35(self):
    assert val['nci'][0] == 0
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 0
-   assert val['standard_tax'] == 0
-   assert val['recommend'] == 'joint'
+   assert val['standard_tax'] == 21600
+   assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 0
 
 @mock.patch('builtins.input', side_effect=['2', '50000', '30000'])
@@ -429,6 +429,6 @@ def test_36(self):
    assert val['nci'][0] == 0
    assert val['nci'][1] == 0
    assert val['individual_tax'] == 0
-   assert val['standard_tax'] == 0
-   assert val['recommend'] == 'joint'
+   assert val['standard_tax'] == 12000
+   assert val['recommend'] == 'seperate'
    assert val['joint_tax'] == 0
